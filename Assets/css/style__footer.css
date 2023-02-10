@@ -1,0 +1,116 @@
+/* CSS solo para la parte del footer */
+.footer {
+    background-color: var(--morado);
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer__container {
+    width: 100%;
+    max-width: 79rem;
+    padding: 1rem;
+
+    color: var(--white);
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.footer__listas {
+    width: 100%;
+    padding: 0 0 1rem 0;
+    margin: 0 0 1rem 0;
+    border-bottom: 1px solid var(--violeta);
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: start;
+}
+.footer__ul {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.footer__li {}
+.footer__h3 {
+    margin: 0 0 .5rem 0;
+    font-weight: bold;
+}
+.footer__p {}
+.footer__a {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--violeta);
+
+    gap: .5rem;
+}
+.footer__icon {
+    height: 1rem;
+    filter: var(--violeta-filter);
+}
+.footer__span {}
+
+.redes {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+}
+.redes__a {}
+.redes__circulo {
+    background-color: var(--violeta);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.redes__icon {
+    height: 1.5rem;
+    filter: var(--morado-filter);
+}
+
+.footer__copyright {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.footer__link {
+    color: var(--violeta);
+}
+
+/* No hace falta responsive para tablet ya que no se rompe */
+
+/* Responsive para telefono */
+@media (max-width: 480px) {
+    .footer__container {
+        padding: .5rem 1rem 3.75rem 1rem;
+    }
+    .footer__listas {
+        margin: 0 0 .25rem 0;
+        padding: 0 0 .25rem 0;
+
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+        gap: .5rem;
+    }
+    .footer__h3 {
+        margin: 0 0 .25rem 0;
+    }
+
+}
