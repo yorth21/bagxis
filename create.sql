@@ -38,7 +38,7 @@ CREATE TABLE `lista` (
 CREATE TABLE `productos` (
   `idprodt` int PRIMARY KEY AUTO_INCREMENT,
   `producto` varchar(50) NOT NULL,
-  `descripcion` varchar(256) NOT NULL,
+  `descripcion` varchar(110) NOT NULL,
   `tipo` char(1) NOT NULL,
   `color` int(3) NOT NULL,
   `marca` varchar(20) NOT NULL,

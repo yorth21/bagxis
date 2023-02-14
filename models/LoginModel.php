@@ -31,9 +31,9 @@
             return $data;
         }
 
-        public function getMunicipiosDepartamentos(int $id)
+        public function getMunicipiosDepartamentos(int $departamento)
         {
-            $sql = "SELECT * FROM municipios WHERE departamento = $id";
+            $sql = "SELECT * FROM municipios WHERE departamento = $departamento";
             $data = $this->selectAll($sql);
             return $data;
         }

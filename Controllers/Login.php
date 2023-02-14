@@ -11,6 +11,7 @@
             parent::__construct();
         }
 
+        /* Funciones para llamar a las vistas */
         public function index()
         {
             // enviar a la vista para logearse
@@ -24,15 +25,35 @@
             $this->views->getView($this, "registrarse", $data);
         }
 
-        public function municipios(int $id)
+        public function verPerfil()
         {
-            $data = $this->model->getMunicipiosDepartamentos($id);
+            // enviar a la vista para ver perfil
+            $this->views->getView($this, "perfil");
+        }
+
+        /* Fin funciones pra llamar a las vistas */
+
+        //Buscar municipios por el cogido del departamento
+        public function municipios(int $departamento)
+        {
+            $data = $this->model->getMunicipiosDepartamentos($departamento);
             $html = "<option value='' selected>Seleccione...</option>";
             for ($i=0; $i < count($data); $i++) {
                 $html.="<option value='".$data[$i]['idmunicipio']."'>".$data[$i]['municipio']."</option>";
             }
             echo $html;
             die();
+        }
+
+        // Buscar un usuario por su cedula       
+        public function buscarUsuario($cedula)
+        {
+            $estado = 1;
+            $data = $this->model->getUsuarioDocumento($cedula, $estado); // Buscamos si el usuario esta en la base de datos
+            if (!empty($data)) {
+                return true;
+            }
+            return false;
         }
 
         /* Funcion para registrar a los usuarios */
@@ -73,16 +94,7 @@
             die();
         }
 
-        public function buscarUsuario($cedula)
-        {
-            $estado = 1;
-            $data = $this->model->getUsuarioDocumento($cedula, $estado); // Buscamos si el usuario esta en la base de datos
-            if (!empty($data)) {
-                return true;
-            }
-            return false;
-        }
-
+        /* Funcion para iniciar sesion */
         public function loguearse()
         {
             // Credenciales que ingreso el usuario
@@ -113,103 +125,20 @@
             die();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public function validar()
+        /* Funcion para retornar la informacion del usuario logueado */
+        public function datosSesion()
         {
-            // validar cuando se logue el usuario
-            if (empty($_POST['usuario'] || empty($_POST['clave']))) {
-                $msg = "Los campos estan vacios";
-            } else {
-                $usuario = $_POST['usuario'];
-                $clave = $_POST['clave'];
-                $hash = hash("SHA256", $clave);
-                $estado = 1;
-                $data = $this->model->getUsuario($usuario, $clave, $estado);
-                if (!empty($data)) {
-                    $_SESSION['cedula'] = $data['cedula'];
-                    $_SESSION['nombres'] = $data['nombres'];
-                    $_SESSION['apellidos'] = $data['apellidos'];
-                    $_SESSION['activo'] = true;
-                    $msg = "ok";
-                } else {
-                    $msg = "Usuario o contraseña incorrecta";
-                }
+            // Preguntamos si la sesion esta activa
+            if (empty($_SESSION)) {
+                echo json_encode("No ha iniciado sesion");
+                return;
             }
-            echo json_encode($msg, JSON_UNESCAPED_UNICODE); // para mostrar caracteres especiales como tildes y ñ
+            // Enviamos los datos de la sesion
+            echo json_encode($_SESSION);
             die();
         }
 
-        public function vldocumento($documento) // validar que usuario no exista
-        {
-            $estado = 1;
-            $data = $this->model->getDocUsuario($documento, $estado);
-            if (!empty($data)) {
-                $msg = "ok";
-            } else {
-                $msg = "Usuario ya existe";
-            }
-            echo json_encode($msg, JSON_UNESCAPED_UNICODE); // para mostrar caracteres especiales como tildes y ñ
-            die();
-        }
-
-        public function registrar1()
-        {
-            date_default_timezone_set("America/Bogota");
-            $fechareg = date('Y-m-d');
-
-            $tipodoc = $_POST['tipodoc'];
-            $documento = $_POST['documento'];
-            $estado = 1;
-            $data = $this->model->getDocUsuario($documento, $estado);
-            if (!empty($data)) {
-                $msg = "Usuario ya existe";
-            } else {
-                $nombre = $_POST['nombre'];
-                $apellido = $_POST['apellido'];
-                $genero = $_POST['genero'];
-                $fechanac = $_POST['fechanac'];
-                $clave = $_POST['clave'];
-                $departamento = $_POST['departamento'];
-                $municipio = $_POST['municipio'];
-                $direccion = $_POST['direccion'];
-                $email = $_POST['email'];
-                $telefono = $_POST['telefono'];
-                $hash = hash("SHA256", $clave);
-
-                echo $hash;
-
-                if ($tipodoc == "" || empty($documento) || empty($nombre)  || empty($apellido)  || $genero == "" || empty($fechanac)  || empty($hash)) {
-                    $msg = "Hay un campo vacio en la sesion Datos personal";
-                } else {
-                    if (empty($departamento) || empty($municipio) || empty($direccion) || empty($email) || empty($telefono)) {
-                        $msg = "Hay un campo vacio en la sesion Datos contacto";
-                    } else {
-                        $data = $this->model->registrarUsuario($tipodoc, $documento, $nombre, $apellido, $genero, $fechanac, $hash,
-                                                                $departamento, $municipio, $direccion, $email, $telefono, $fechareg);
-                        if ($data == "ok") {
-                            $msg = "si";
-                        } else {
-                            $msg = "Error al registrar el proveedor";
-                        }
-                    }
-                }
-            }
-            echo json_encode($msg, JSON_UNESCAPED_UNICODE); // para mostrar caracteres especiales como tildes y ñ
-            die();
-        }
-
+        /* Funcion para cerrar sesion */
         public function salir()
         {
             session_destroy();

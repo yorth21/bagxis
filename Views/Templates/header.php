@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?php echo base_url; ?>Assets/css/reset.css" rel="stylesheet" />
     <link href="<?php echo base_url; ?>Assets/css/style__header.css" rel="stylesheet" />
-    <link href="<?php echo base_url; ?>Assets/css/import.css" rel="stylesheet" />
+    <link href="<?php echo base_url; ?>Assets/css/style__index.css" rel="stylesheet" />
     <link href="<?php echo base_url; ?>Assets/css/style__footer.css" rel="stylesheet" />
     <script src="<?php echo base_url; ?>Assets/js/library/jquery-3.6.3.js"></script>
     <link rel="shortcut icon" href="<?php echo base_url; ?>Img/bagxis/bolso.png">
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="right__li rigth__perfil">
-                        <button class="right__a right__a--perfil" id="loginShow">
+                        <button class="right__a right__a--perfil" id="btnPerfil" onclick="mostrarPerfil();">
                             <img src="<?php echo base_url; ?>Img/icons/right/user.svg" alt="user" class="right__img">
                         </button>
                     </li>
@@ -97,21 +97,17 @@
                 </a>
             </li>
             <li class="menu__li">
-                <a class="menu__a menu__a--iniciar" id="loginShowSub">
+                <button class="menu__a menu__a--iniciar" onclick="mostrarPerfil();">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/user.svg" alt="Perfil" class="menu__img">
                     </div>
-                    <h3 class="menu__h3">Iniciar</h3>
-                </a>
+                    <h3 class="menu__h3" id="textBtnPerfil">Iniciar</h3>
+                </button>
             </li>
         </ul>
     </nav>
 
-    <!-- Espacio para que los demas elementos no se pongan debajo del navbar -->
-    <div class="main"></div>
-
     <!-- Crear el modal para iniciar sesion -->
-
     <dialog class="login" id="loginDialog">
         <form class="login__form" method="dialog" id="frmLogin">
             <div class="login__row">
@@ -154,6 +150,11 @@
             </div>
         </form>
     </dialog>
+
+    <!-- Espacio para que los demas elementos no se pongan debajo del navbar -->
+    <main class="main">
+        <!-- Vamos a meter los contenedores dentro del main -->
+
 
 <!-- Se une con el contenido de las demas vistas -->
 

@@ -79,11 +79,36 @@
 }
 .right__a {}
 .right__a--perfil {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
 }
 .right__img {
     height: 1.5rem;
     filter: var(--morado-filter);
+}
+/* Para ver el perfil */
+.right__miperfil {
+    background-color: var(--morado);
+    width: 1.5rem;
+    height: 1.5rem;
+
+    border-radius: .75rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+.right__icon {
+    color: var(--violeta);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 /* Estilos para el submenu */
@@ -119,22 +144,33 @@
     gap: 2rem;
 }
 .menu__li {}
-.menu__a {}
+.menu__a {
+    cursor: pointer;
+}
 .menu__div {}
 .menu__img {
     display: none;
     filter: var(--morado-filter);
 }
-.menu__h3 {}
+.menu__h3 {
+    font-weight: bold;
+}
 
 /* Clase para diferenciar el item perfil */
 .perfil {
     display: none;
 }
 
-/* Espacio para que no sobreponga con el header */
 .main {
+    width: 100%;
+    /* Espacio para que no sobreponga con el header */
     margin: 5rem 0 0 0;
+
+    /* para que todo el contenido este centrado */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ------------------------------------------------- */
@@ -295,6 +331,7 @@
     /* Espacio para que no sobreponga con el header */
     .main {
         margin: 7rem 0 0 0;
+
     }
 }
 
@@ -377,22 +414,14 @@
     min-height: 80vh;
 }
 
-/* Provisional */
-.bienvenida {
-    width: 100%;
-    padding: 2rem 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/* Disenio para el inicio */
 .bienvenida__container {
+    background-color: royalblue;
     max-width: 79rem;
     width: 100%;
 }
 .bienvenida__text {
     font-size: 2rem;
-    line-height: 2rem;
-
     color: var(--morado);
 }
+

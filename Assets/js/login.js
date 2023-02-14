@@ -1,18 +1,24 @@
 /* -------------------------------------------------------------
     Funciones para mostrar el modal del login
   ------------------------------------------------------------- */
+// Obtenemos el elemento modal para interactuar con el
 const loginDialog = document.getElementById('loginDialog');
-const loginShow = document.getElementById('loginShow');
-const loginShowSub = document.getElementById('loginShowSub'); // Abrir login desde el menu inferior
+// Obtenemos el boton para cerrar el modal
 const loginCerrar = document.getElementById('loginCerrar');
 
-// abrir el modal del login
-loginShow.addEventListener("click", () => {
+/* Funcion para ver el perfil y si
+    no esta logueado le muestra el menu */
+const mostrarPerfil = async () => {
+    // comprobamos si no esta logueado para mostrar el login
+    const data = await datosSesion();
+    if (data.activo == true) {
+        location.href = base_url + 'Login/verPerfil'; // redirigimos a la vista para ver el perfil del usuario
+        return;
+    }
+    // abrir el modal del login
     loginDialog.showModal();
-});
-loginShowSub.addEventListener("click", () => {
-    loginDialog.showModal();
-});
+};
+
 // cerrar el modal del login
 loginCerrar.addEventListener('click', function() {
     loginDialog.close();
@@ -32,8 +38,8 @@ function alert(icono, msg) {
     Funciones para el formulario de registrarse 
   ------------------------------------------------------------- */
 
-// Select Departamentos - minicipios
-$(document).ready(function(e){
+  $(document).ready(function(e){ // Se ejecuta cuando todo el documento HTML este cargado
+    // Select Departamentos - minicipios
     $("#departamento").change(function () {
         var id = $("#departamento").val();
         $.ajax({
@@ -47,6 +53,9 @@ $(document).ready(function(e){
             }
         });
     })
+
+    // Funcion para saber si el usuario esta logueado o no
+    datosSesion();
 });
 
 /* funcion para registrar usuarios */
@@ -93,6 +102,7 @@ function frmLogin(e) {
                 alert('success', 'Inicio sesion con exito');
                 frm.reset(); // Limpiamos el formulario
                 loginDialog.close(); // cerramos el modal
+                datosSesion(); // Para optener los datos se la sesion iniciada
             } else {
                 // Mostrar mensaje de error en el login y limpiar el formulario
                 const loginRes = document.getElementById("loginRes")
@@ -104,4 +114,27 @@ function frmLogin(e) {
             }
         }
     } 
+}
+
+/* -------------------------------------------------------------
+    Funciones para cuando el usuario ya esta logueado
+  ------------------------------------------------------------- */
+// Funcion para obtener los datos de la sesion del usuario
+const datosSesion = async () => {
+    const response = await fetch( base_url + 'Login/datosSesion');
+    const data = await response.json();
+    if (data.activo == true) {
+        miPerfil(data);
+    }
+    return data;
+};
+// Funcion para cambiar el icono de iniciar sesion
+const miPerfil = ( data ) => {
+    // Obtenemos los campos que vamos a modificar
+    const btnPerfil = document.getElementById("btnPerfil");
+    const textBtnPerfil = document.getElementById("textBtnPerfil");
+
+    // Hacemos un innerHTML para modificar esos campos y dar ilusion que ya esta logueado
+    btnPerfil.insertAdjacentHTML("beforeend", data.nombres);
+    textBtnPerfil.innerHTML = data.nombres;
 }

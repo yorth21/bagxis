@@ -149,7 +149,7 @@ body {
   color: var(--negro);
   position: relative;
   /* opcional */
-  line-height: 1.4em;
+  /* line-height: 1.4em; */
   /* opcional */
   -webkit-hyphens: auto;
       -ms-hyphens: auto;
