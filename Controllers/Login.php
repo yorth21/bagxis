@@ -85,7 +85,7 @@
             
             // Insertamos el usuario en la base de datos
             $data = $this->model->registrarUsuario($post_data);
-            if ($data == 0) {
+            if (!$data) {
                 echo "No se pudo registrar";
                 return;
             }

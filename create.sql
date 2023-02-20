@@ -25,22 +25,23 @@ CREATE TABLE `departamentos` (
 CREATE TABLE `carritos` (
   `idcarrito` int PRIMARY KEY AUTO_INCREMENT,
   `cedula` varchar(20) NOT NULL,
-  `estato` int(1) DEFAULT 1
+  `estado` int(1) DEFAULT 1
 );
 
 CREATE TABLE `lista` (
   `idlista` int PRIMARY KEY AUTO_INCREMENT,
   `carrito` int NOT NULL,
   `producto` int NOT NULL,
-  `cantidad` int(4) NOT NULL DEFAULT 1
+  `cantidad` int(4) NOT NULL DEFAULT 1,
+   `estado` int(1) DEFAULT 1
 );
 
 CREATE TABLE `productos` (
   `idprodt` int PRIMARY KEY AUTO_INCREMENT,
   `producto` varchar(50) NOT NULL,
-  `descripcion` varchar(110) NOT NULL,
+  `descripcion` varchar(256) NOT NULL,
   `tipo` char(1) NOT NULL,
-  `color` int(3) NOT NULL,
+  `color` varchar(20) NOT NULL,
   `marca` varchar(20) NOT NULL,
   `modelo` varchar(20) NOT NULL,
   `img` varchar(256) NOT NULL,

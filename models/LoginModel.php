@@ -41,11 +41,27 @@
         // Funcion para registrar al usuario
         public function registrarUsuario(array $post_data)
         {
+            // Iniciamos transacion
+            $this->startTransaction(); // begin
+
             // Hacer el SQL para insertar el usuario
             $sql = "INSERT INTO usuarios(cedula, nombres, apellidos, departamento, municipio, direccion, telefono, email, clave)
                     VALUES (?,?,?,?,?,?,?,?,?)";
-            $res = $this->save($sql, $post_data);
+            $res1 = $this->save($sql, $post_data);
+
+            // Hacer el SQL para insertar el primer carrito del usuario
+            $sql = "INSERT INTO carritos(cedula) VALUES (?)";
+            $datos = array($post_data[0]);
+            $res2 = $this->save($sql, $datos);
+
+            $commit = true;
+            if ($res1 == 0 || $res2 == 0) {
+                $commit = false;
+            }
             
+            // Terminanos la transacion
+            $res = $this->submitTransaction($commit);
+
             return $res;
         }
         

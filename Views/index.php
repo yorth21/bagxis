@@ -1,14 +1,5 @@
 <?php include "Views/Templates/header.php"; ?>
 
-<!-- Contenido principal -->
-<!-- <section class="bienvenida__container">
-    <div class="bienvenida__content">
-        <div class="bienvenida__title">
-            <h2 class="bienvenida__text">Bienvenidxs</h2>
-        </bienvenida>
-    </div>
-</section> -->
-
 <!-- SLIDE START -->
 <div id="slider-container" class="slider-container">
     <div class="slider" id="slider">
@@ -39,42 +30,142 @@
     <button id="button-left" class="button">&lt;</button>
     <button id="button-right" class="button">&gt;</button>
 </div> -->
+
+<!-- Script para el slider -->
+<script>
+
+  /* Funciones para el slider */
+  const sliderContainer = document.getElementById('slider-container');
+  const slider = document.getElementById('slider');
+  // const buttonLeft = document.getElementById('button-left');
+  // const buttonRight = document.getElementById('button-right');
+
+  const sliderElements = document.querySelectorAll('.slider__element');
+
+  const rootStyles = document.documentElement.style;
+
+  let slideCounter = 0;
+  let isInTransition = false;
+
+  const DIRECTION = {
+    RIGHT: 'RIGHT',
+    LEFT: 'LEFT'
+  };
+
+  const getTransformValue = () =>
+    Number(rootStyles.getPropertyValue('--slide-transform').replace('px', ''));
+
+  const reorderSlide = () => {
+    const transformValue = getTransformValue();
+    rootStyles.setProperty('--transition', 'none');
+    if (slideCounter === sliderElements.length - 1) {
+      slider.appendChild(slider.firstElementChild);
+      rootStyles.setProperty(
+        '--slide-transform',
+        `${transformValue + sliderElements[slideCounter].scrollWidth}px`
+      );
+      slideCounter--;
+    } else if (slideCounter === 0) {
+      slider.prepend(slider.lastElementChild);
+      rootStyles.setProperty(
+        '--slide-transform',
+        `${transformValue - sliderElements[slideCounter].scrollWidth}px`
+      );
+      slideCounter++;
+    }
+
+    isInTransition = false;
+  };
+
+  const moveSlide = direction => {
+    if (isInTransition) return;
+    const transformValue = getTransformValue();
+    rootStyles.setProperty('--transition', 'transform 1s');
+    isInTransition = true;
+    if (direction === DIRECTION.LEFT) {
+      rootStyles.setProperty(
+        '--slide-transform',
+        `${transformValue + sliderElements[slideCounter].scrollWidth}px`
+      );
+      slideCounter--;
+    } else if (direction === DIRECTION.RIGHT) {
+      rootStyles.setProperty(
+        '--slide-transform',
+        `${transformValue - sliderElements[slideCounter].scrollWidth}px`
+      );
+      slideCounter++;
+    }
+  };
+
+
+
+  // buttonRight.addEventListener('click', () => moveSlide(DIRECTION.RIGHT));
+  // buttonLeft.addEventListener('click', () => moveSlide(DIRECTION.LEFT));
+
+  slider.addEventListener('transitionend', reorderSlide);
+  reorderSlide();
+
+  setInterval(function() {
+      moveSlide(DIRECTION.RIGHT);
+      
+  }, 5000);
+</script>
+
 <!-- SLIDE END -->
 
 <!-- START - Contenido para los productos nuevos -->
 <section class="new">
     <h1 class="new__title">Productos mas comprados</h1>
-    <ul class="new__items">
-        <li class="card">
-            <img class="card__img" src="<?php echo base_url; ?>Img/assets/bag1.jpg" alt="Card image">
-            <div class="card__content">
-                <h2 class="card__title">Título de la tarjeta</h2>
-                <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sed aliquam veritatis nam magni possimus esse!</p>
-            </div>
-        </li>
-        <li class="card">
-            <img class="card__img" src="<?php echo base_url; ?>Img/assets/bag2.jpg" alt="Card image">
-            <div class="card__content">
-                <h2 class="card__title">Título de la tarjeta</h2>
-                <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sed aliquam veritatis nam magni possimus esse!</p>
-            </div>
-        </li>
-        <li class="card">
-            <img class="card__img" src="<?php echo base_url; ?>Img/assets/bag3.jpg" alt="Card image">
-            <div class="card__content">
-                <h2 class="card__title">Título de la tarjeta</h2>
-                <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sed aliquam veritatis nam magni possimus esse!</p>
-            </div>
-        </li>
-        <li class="card">
-            <img class="card__img" src="<?php echo base_url; ?>Img/assets/bag4.jpg" alt="Card image">
-            <div class="card__content">
-                <h2 class="card__title">Título de la tarjeta</h2>
-                <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sed aliquam veritatis nam magni possimus esse!</p>
-            </div>
-        </li>
+    <ul class="new__items" id="listaProductosNew">
+        <!-- Productos cargados con el javascript -->
     </ul>
 </section>
+
+<!-- Script para mostrar los productos -->
+<script>
+  $(document).ready(function(e){ // Se ejecuta cuando todo el documento HTML este cargado
+    // Funcion para cargar 4 items nuevos en la pantalla de inicio
+    listaProductosNew();
+  });
+
+  const listaProductosNew = async () => {
+    // Vamos a buscar los archivos nuevos al sistema
+    const response = await fetch( base_url + 'Productos/newProductos')
+    const data = await response.json();
+
+    // Elemento lista en el html
+    let listaProductosNew = document.getElementById("listaProductosNew");
+    
+    // Ciclo for para acceder a todos los items
+    for (var producto of data) {
+        // Acomodar las rutas para el link del procuto y la imagen
+        const idprodt = base_url + 'Productos/producto/' + producto.idprodt;
+        const img = base_url+  producto.img;
+        // Ponerle puntos de mil al precio
+        const precio = (producto.precio).toLocaleString("es-ES");
+        // Descuento
+        let descuento = producto.descuento;
+        descuento = descuento == 0 ? " " : descuento + "%";
+
+        const elemento = `<li class="new__item">
+                                <a href="${idprodt}" class="card">
+                                    <img class="card__img" src="${img}" alt="Card image">
+                                    <div class="card__content">
+                                        <div class="card__precio">
+                                            <h2 class="card__title">$${precio}</h2>
+                                            <h2 class="card__descuento">${descuento}</h2>
+                                        </div>
+                                        <p class="card__text">${producto.producto}</p>
+                                    </div>
+                                </a>
+                            </li>`;
+
+        // Agregar los items a la lista
+        listaProductosNew.insertAdjacentHTML("beforeend", elemento);
+    }
+  }
+</script>
+
 
 
 <?php include "Views/Templates/footer.php"; ?>

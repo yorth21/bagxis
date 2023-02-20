@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li class="right__li">
-                        <a href="" class="right__a">
+                        <a href="<?php echo base_url; ?>Productos/carrito" class="right__a">
                             <img src="<?php echo base_url; ?>Img/icons/right/cart.svg" alt="cart" class="right__img">
                         </a>
                     </li>

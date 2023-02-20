@@ -5,6 +5,12 @@
 @import url(components/registrarse.css);
 /* Estilos para el slider */
 @import url(components/slider.css);
+/* Estilos para la pagina producto */
+@import url(components/producto.css);
+/* Estilos para la pagina del carrito */
+@import url(components/carrito.css);
+/* Estilos para la pagina de facturar */
+@import url(components/facturar.css);
 
 /* Estilos para las categorias */
 .new {
@@ -37,7 +43,8 @@
 .card {
     background-color: var(--white);
     width: 18rem;
-    height: 24rem;
+    height: 20rem;
+    margin: 0 0 1rem 0;
 
     box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
     border-radius: 1rem;
@@ -56,10 +63,21 @@
     margin: .5rem 0 0 0;
     padding: 1rem;
 }
+.card__precio {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    align-items: center;
+}
 .card__title {
     font-size: 1.5em;
     font-weight: bold;
-} 
+}
+.card__descuento {
+    margin: 0 0 0 1rem;
+    font-size: 1.2em;
+    color: var(--secondary);
+}
 .card__text {
     margin: .5rem 0 0 0;
 }

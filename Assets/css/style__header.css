@@ -4,12 +4,13 @@
     --violeta: #A08FDB;
     --violeta-20: #EDE9F9;
     --morado: #29194E;
+    --secondary: #3e4e18;
     --dark: #182226;
     --white: #fff;
     --black: #000;
 
     /* Colores RGB con opacidad */
-    --black-20: rgba(0, 0, 0, 1);
+    --black-20: rgba(0, 0, 0, .3);
 
     /* Filtro para iconos */
     --morado-filter: invert(5%) sepia(66%) saturate(5322%) hue-rotate(258deg) brightness(99%) contrast(88%);
@@ -90,8 +91,13 @@
     height: 1.5rem;
     filter: var(--morado-filter);
 }
+.right__span {
+    margin: 0 0 0 .5rem;
+    font-size: 1.2em;
+    font-weight: bold;
+}
 /* Para ver el perfil */
-.right__miperfil {
+/*.right__miperfil {
     background-color: var(--morado);
     width: 1.5rem;
     height: 1.5rem;
@@ -109,7 +115,7 @@
     text-align: center;
     font-size: 1.2rem;
     font-weight: 700;
-}
+}*/
 
 /* Estilos para el submenu */
 

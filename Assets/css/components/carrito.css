@@ -1,0 +1,138 @@
+.cart__container {
+    max-width: 79rem;
+    width: 100%;
+    min-height: 70vh;
+    margin: 2rem 0;
+
+    color: var(--morado);
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+.cart__content {
+    background-color: var(--white);
+    padding: 2rem;
+    margin: 0 1rem;
+    border: 1px solid var(--black-20);
+    border-radius: .2rem;
+}
+
+
+/* Estilos para el contenido */
+/* Title */
+.cart__title {
+    padding: 1rem;
+    border-bottom: 1px solid var(--black-20);
+    font-size: 1.5em;
+}
+.cart__h1 {
+    font-weight: bold;
+}
+
+/* Producto */
+.cart__row {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+}
+.cart__row--content {
+    padding: 0 0 1rem 0;
+    margin: 1rem 0 0 0;
+    border-bottom: 1px solid var(--black-20);
+
+    gap: 1rem;
+}
+.cart__row--50 {
+    max-width: 50%;
+}
+.cart__row--sb {
+    justify-content: space-between;
+}
+.cart__col {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.cart__col--auto {
+    width: auto;
+}
+
+/* Estilos elementos dentro de cart__row--content */
+.cart__img {
+    width: 4rem;
+    height: 3rem;
+    margin: 0 1rem 0 0;
+}
+.cart__nombre {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.cart__row--btn {
+    margin: .5rem 0 0 .5rem;
+    font-size: .8em;
+    gap: 2rem;
+}
+.cart__del {
+    cursor: pointer;
+}
+.cart__comprarAhora {
+
+}
+.cart__span--title {
+    font-weight: bold;
+}
+.cart__span--mini {
+    font-size: .8em;
+}
+.cart__porcentaje {
+    margin: 0 .5rem 0 0;
+    color: var(--secondary);
+}
+.cart__precioAnterios {
+    text-decoration: line-through;
+}
+.cart__precio {
+    margin: .2rem 0 0 0;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+/* Total a pagar */
+.cart__total {
+    padding: 0 0 1rem 0;
+    margin: 1rem 0 0 0;
+    text-align: end;
+}
+.cart__total--span { 
+    font-size: 1.5em;
+    font-weight: 500;
+}
+.cart__total--mr1 {
+    margin: 0 1rem 0 0;
+}
+
+/* Boton para comprar */
+.cart__btn {
+    padding: 0 0 1rem 0;
+    margin: 1rem 0 0 0;
+    
+    display: flex;
+    justify-content: end;
+}
+
+.cart__comprar {
+    background-color: var(--morado);
+    padding: .8rem 2rem;
+
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+/* Cuando no hay productos */
+.cart__sinProductos {
+    text-align: center;
+
+    font-size: 1.5rem;
+}

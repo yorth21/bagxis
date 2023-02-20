@@ -1,0 +1,130 @@
+.fact__container {
+    max-width: 79rem;
+    width: 100%;
+    min-height: 70vh;
+    margin: 2rem 0;
+
+    color: var(--morado);
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+.fact__content {
+    background-color: var(--white);
+    padding: 2rem;
+    margin: 0 1rem;
+    border: 1px solid var(--black-20);
+    border-radius: .2rem;
+}
+
+/* Filas y columnas */
+.fact__row {
+    display: flex;
+    flex-flow: row;
+}
+.fact__row--sb {
+    justify-content: space-between;
+}
+.fact__col {
+    display: flex;
+    flex-flow: column;
+}
+
+/* Resumen de compra */
+.fact__col--formaPago {
+    width: 100%;
+    margin: 0 4rem 0 0;
+}
+.fact__col--30 {
+    min-width: 30%;
+    padding: 0 0 0 1rem;
+    border-left: 1px solid var(--black-20);
+}
+.fact__h2 {
+    padding: 0 0 .5rem 0;
+    margin: 0 0 .5rem 0;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    text-align: center;
+    border-bottom: 1px solid var(--black-20);
+}
+.fact__span {
+    margin: 0 0 .5rem 0;
+}
+.fact__span--secondary {
+    color: var(--secondary);
+}
+.fact__row--detalles, .fact__row--total {
+    justify-content: space-between;
+}
+.fact__row--total {
+    padding: .5rem 0 0 0;
+    margin: .5rem 0 0 0;
+
+    border-top: 1px solid var(--black-20);
+}
+.fact__span--max {
+    font-size: 1.2em;
+}
+
+/* Forma de pago */
+.fact__h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 0 1rem 0;
+}
+.fact__form {
+    display: flex;
+    flex-flow: column;
+
+    gap: 1rem;
+}
+.fact__group {
+    position: relative;
+}
+.fact__label {
+    padding: 2rem 2rem 2rem 4rem;
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: start;
+    align-items: center;
+
+    border-radius: .2rem;
+    border: 1px solid var(--black-20);
+}
+.fact__input {
+    background-color: var(--violeta);
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 0 0 0 2rem;
+
+    border-radius: .6rem;
+    border: 3px solid var(--morado);
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.fact__input:checked {
+    background-color: var(--morado);
+}
+.fact__input:checked + .fact__label {
+    background-color: var(--violeta-20);
+}
+.fact__comprar {
+    padding: 0 0 1rem 0;
+    margin: 1rem 0 0 0;
+    
+    display: flex;
+    justify-content: end;
+}
+.fact__pagar {
+    background-color: var(--morado);
+    padding: .8rem 2rem;
+
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+}

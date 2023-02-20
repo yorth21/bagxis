@@ -30,7 +30,7 @@ function alert(icono, msg) {
         icon: icono,
         title: msg,
         showConfirmButton: false,
-        timer: 1500,
+        timer: 3000,
     })
 }
 
@@ -38,7 +38,7 @@ function alert(icono, msg) {
     Funciones para el formulario de registrarse 
   ------------------------------------------------------------- */
 
-  $(document).ready(function(e){ // Se ejecuta cuando todo el documento HTML este cargado
+$(document).ready(function(e){ // Se ejecuta cuando todo el documento HTML este cargado
     // Select Departamentos - minicipios
     $("#departamento").change(function () {
         var id = $("#departamento").val();
@@ -75,7 +75,7 @@ function frmRegistrar(e) {
                 frm.reset(); // Limpiamos el formulario
                 setTimeout(() => {
                     location.href = base_url;
-                }, 1500);
+                }, 3000);
             } else {
                 alert('error', res);
             }
@@ -133,8 +133,13 @@ const miPerfil = ( data ) => {
     // Obtenemos los campos que vamos a modificar
     const btnPerfil = document.getElementById("btnPerfil");
     const textBtnPerfil = document.getElementById("textBtnPerfil");
+    const nombre = (data.nombres).split(" ");
+    const spanPerfil = `<span class="right__span">${nombre[0]}</span>`;
 
     // Hacemos un innerHTML para modificar esos campos y dar ilusion que ya esta logueado
-    btnPerfil.insertAdjacentHTML("beforeend", data.nombres);
-    textBtnPerfil.innerHTML = data.nombres;
+    btnPerfil.insertAdjacentHTML("beforeend", spanPerfil);
+    textBtnPerfil.innerHTML = nombre[0];
 }
+
+
+
