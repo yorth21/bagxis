@@ -31,6 +31,9 @@
     font-size: 2em;
     font-weight: bold;
 }
+.new__title--start {
+    text-align: start;
+}
 .new__items {
     width: 100%;
 
@@ -85,3 +88,8 @@
     margin: .5rem 0 0 0;
 }
   
+/* Para que no quede un espacio despues del footer */
+.new--70vh {
+    min-height: 70vh;
+}
+

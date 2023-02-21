@@ -77,11 +77,18 @@
         {
             // Validar el tipo de producto y segun eso mostrarlos
             if ($tipo == "bolsos") {
-                
+                $tipoProdt = "bolso";
+                $data = $this->model->getProductosTipo($tipoProdt);
+            } 
+            
+            if ($tipo == "carteras") {
+                $tipoProdt = "cartera";
+                $data = $this->model->getProductosTipo($tipoProdt);
             }
 
+            $data1['tipo'] = $tipo;
 
-            $this->views->getView($this, $tipo);
+            $this->views->getView($this, "productos", $data, $data1);
         }
 
         /* Funciones para mostrar datos */
@@ -215,6 +222,21 @@
 
             // Listar los productos que tiene en el carrito
             $productos = $this->model->getProductosCarrito($carrito['idcarrito']);
+            
+            // Comprobar si el producto existe y hay stock
+            foreach ($productos as $producto) {
+                $data = $this->model->getProducto($producto['idprodt']);
+                // Comprobar que exista
+                if (empty($data)) {
+                    echo json_encode("Producto no existe");
+                    return;
+                }
+                // Comprobar que haya stock
+                if ($data['cantidad'] < $producto['cantidad']) {
+                    echo json_encode("Hay un producto que ya no tiene stock");
+                    return;
+                }
+            }
 
             // Obtenemos el total con descuento y la cantidad de productos
             $data = $this->totalProductos($productos);

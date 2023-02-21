@@ -23,7 +23,7 @@
             return $data;
         }
 
-        public function getProductos(string $tipo)
+        public function getProductosTipo(string $tipo)
         {
             $sql = "SELECT * FROM productos WHERE tipo = '$tipo' AND estado = 1";
             $data = $this->selectAll($sql);

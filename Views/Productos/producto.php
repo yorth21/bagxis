@@ -45,7 +45,7 @@
                 </div>
                 <div class="prodt__row prodt__row--btn">
                     <div class="prodt__col prodt__col--btn">
-                        <button class="prodt__btn">Comprar ahora</button>
+                        <!-- <button class="prodt__btn">Comprar ahora</button> -->
                         <button class="prodt__btn prodt__btn--cart" onclick="frmAddCarrito();">Agregar al carrito</button>
                     </div>
                 </div>
