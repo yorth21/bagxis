@@ -117,7 +117,10 @@
         const res = await responsePost.json();
         // Hacer validaciones y mostrar alerta de acuerdo al resultado
         if (res == "ok") {
-            alert('success', 'Producto agregado al carrito con exito');
+            alert('warning', 'Producto eliminado');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             alert('error', res);
         }

@@ -23,6 +23,13 @@
             return $data;
         }
 
+        public function getProductos(string $tipo)
+        {
+            $sql = "SELECT * FROM productos WHERE tipo = '$tipo' AND estado = 1";
+            $data = $this->selectAll($sql);
+            return $data;
+        }
+
         public function getProductosCarrito($idCarrito)
         {
             $sql = "SELECT prodt.idprodt, cart.idcarrito, lst.idlista, prodt.img, prodt.producto, prodt.tipo, prodt.color, lst.cantidad, prodt.cantidad stock, prodt.descuento, prodt.precio, lst.estado  FROM lista lst 
@@ -75,6 +82,59 @@
             $data = array($idcart, $idprodt);
             $res = $this->save($sql, $data);
             return $res;
+        }
+
+        public function facturarProductos(array $factura, int $idcarrito, int $cedula, array $productos)
+        {
+            // Iniciamos transacion
+            $this->startTransaction(); // begin
+
+            $sql = "INSERT INTO facturas (carrito, total, formapago)
+                    VALUES (?,?,?)";
+            $data = array($factura['idcarrito'], $factura['total'], $factura['formaPago']);
+            $res1 = $this->save($sql, $data);
+            // Validar si se ejecuto bien
+            if ($res1 == 0) {
+                // Terminanos la transacion
+                $res = $this->submitTransaction(false);
+                return false;
+            }
+
+            // actualizar el estado del carrito
+            $sql = "UPDATE carritos SET estado = 0 WHERE idcarrito = ?";
+            $data = array($idcarrito);
+            $res2 = $this->save($sql, $data);
+            if ($res2 == 0) {
+                // Terminanos la transacion
+                $res = $this->submitTransaction(false);
+                return false;
+            }
+
+            // Crear un carrito nuevo para el cliente
+            $sql = "INSERT INTO carritos (cedula) VALUES (?)";
+            $datos = array($cedula);
+            $res3 = $this->save($sql, $datos);
+            if ($res3 == 0) {
+                // Terminanos la transacion
+                $res = $this->submitTransaction(false);
+                return false;
+            }
+
+            // Restar la cantidad a todos los productos comprados
+            foreach ($productos as $producto) {
+                $sql = "UPDATE productos SET cantidad = cantidad - ? WHERE idprodt = ?";
+                $data = array($producto['cantidad'], $producto['idprodt']);
+                $res4 = $this->save($sql, $data);
+                if ($res4 == 0) {
+                    // Terminanos la transacion
+                    $res = $this->submitTransaction(false);
+                    return false;
+                }
+            }
+
+            $res = $this->submitTransaction(true);
+            return true;
+            die();
         }
 
     }

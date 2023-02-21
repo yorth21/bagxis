@@ -16,9 +16,14 @@
                 <div class="prodt__row">
                     <h1 class="prodt__nombre"><?php echo $data['producto']; ?></h1>
                 </div>
-                <div class="prodt__row prodt__row--precio">
-                    <h2 class="prodt__precio">$<?php echo $data['precio']; ?></h2>
-                    <h3 class="prodt__descuento"><?php echo $data['descuento']; ?></h3>
+                <div class="prodt__col prodt__row--precio">
+                    <?php if ($data['precioAnterior'] != $data['precioDescuento']) { ?>
+                        <h2 class="prodt__precioAnterior">$ <?php echo $data['precioAnterior']; ?></h2>
+                    <?php } ?>
+                    <div class="prodt__row">
+                        <h2 class="prodt__precio">$ <?php echo $data['precioDescuento']; ?></h2>
+                        <h3 class="prodt__descuento"><?php echo $data['descuento']; ?></h3>
+                    </div>
                 </div>
                 <div class="prodt__row">
                     <p class="prodt__p"><?php echo $data['tipo']; ?> color <?php echo $data['color']; ?></p>
@@ -90,6 +95,10 @@
 
         const response = await fetch( base_url + 'Login/datosSesion');
         const datosUser = await response.json();
+        if (datosUser == "!sesion") {
+            alert('info', 'Inicie sesion para continuar');
+            return;
+        }
 
         // Hacemos un objeto con los datos para mandarle al servidor
         let datos = {

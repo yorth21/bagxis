@@ -61,15 +61,22 @@
 }
 
 .prodt__row--precio {
-    align-items: center;
+    justify-content: center;
+    align-items: start;
 }
 .prodt__precio {
     font-size: 1.5em;
 }
 .prodt__descuento {
     margin: 0 0 0 1rem;
-    text-align: center;
     color: var(--secondary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prodt__precioAnterior {
+    text-decoration: line-through;
 }
 
 .prodt__form {}

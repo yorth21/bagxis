@@ -92,6 +92,7 @@
 
     border-radius: .2rem;
     border: 1px solid var(--black-20);
+    cursor: pointer;
 }
 .fact__input {
     background-color: var(--violeta);

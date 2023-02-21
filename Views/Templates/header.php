@@ -28,25 +28,25 @@
                     <li class="nav__li">
                         <a href="<?php echo base_url; ?>Home" class="nav__a">Inicio</a>
                     </li>
-                    <li class="nav__li">
+                    <!-- <li class="nav__li">
                         <a href="" class="nav__a">Combos</a>
+                    </li> -->
+                    <li class="nav__li">
+                        <a href="<?php echo base_url; ?>Productos/panelProductos/bolsos" class="nav__a">Bolsos</a>
                     </li>
                     <li class="nav__li">
-                        <a href="" class="nav__a">Bolsos</a>
-                    </li>
-                    <li class="nav__li">
-                        <a href="" class="nav__a">Carteras</a>
+                        <a href="<?php echo base_url; ?>Productos/panelProductos/carteras" class="nav__a">Carteras</a>
                     </li>
                 </ul>
             </div>
 
             <div class="nav__rigth right">
                 <ul class="right__ul">
-                    <li class="right__li">
+                    <!-- <li class="right__li">
                         <a href="" class="right__a">
                             <img src="<?php echo base_url; ?>Img/icons/right/search.svg" alt="search" class="right__img">
                         </a>
-                    </li>
+                    </li> -->
                     <li class="right__li">
                         <a href="<?php echo base_url; ?>Productos/carrito" class="right__a">
                             <img src="<?php echo base_url; ?>Img/icons/right/cart.svg" alt="cart" class="right__img">
@@ -72,16 +72,16 @@
                     <h3 class="menu__h3">Inicio</h3>
                 </a>
             </li>
-            <li class="menu__li">
+            <!-- <li class="menu__li">
                 <a href="" class="menu__a">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/tags.svg" alt="Combos" class="menu__img">
                     </div>
                     <h3 class="menu__h3">Combos</h3>
                 </a>
-            </li>
+            </li> -->
             <li class="menu__li">
-                <a href="" class="menu__a">
+                <a href="<?php echo base_url; ?>Productos/panelProductos/bolsos" class="menu__a">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/bag.svg" alt="Bolsos" class="menu__img">
                     </div>
@@ -89,7 +89,7 @@
                 </a>
             </li>
             <li class="menu__li">
-                <a href="" class="menu__a">
+                <a href="<?php echo base_url; ?>Productos/panelProductos/carteras" class="menu__a">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/bolso.svg" alt="Carteras" class="menu__img">
                     </div>

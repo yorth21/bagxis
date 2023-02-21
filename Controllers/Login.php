@@ -130,7 +130,7 @@
         {
             // Preguntamos si la sesion esta activa
             if (empty($_SESSION)) {
-                echo json_encode("No ha iniciado sesion");
+                echo json_encode("!sesion");
                 return;
             }
             // Enviamos los datos de la sesion

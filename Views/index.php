@@ -142,17 +142,31 @@
         const idprodt = base_url + 'Productos/producto/' + producto.idprodt;
         const img = base_url+  producto.img;
         // Ponerle puntos de mil al precio
-        const precio = (producto.precio).toLocaleString("es-ES");
+        let precio =  parseInt(producto.precio);
         // Descuento
-        let descuento = producto.descuento;
-        descuento = descuento == 0 ? " " : descuento + "%";
+        let descuento = parseInt(producto.descuento);
+        
+        // Validar cuando haya descuento
+        if (descuento > 0) {
+          precioVenta = precio - (precio * (descuento / 100));
+          precio = "$ " + precio.toLocaleString('es-ES');
+          descuento = descuento + "%";
+        } else {
+          precioVenta = precio;
+          precio = "";
+          descuento = "";
+        }
+
+        precioVenta = Math.trunc(precioVenta);
+        precioVenta = precioVenta.toLocaleString('es-ES');
 
         const elemento = `<li class="new__item">
                                 <a href="${idprodt}" class="card">
                                     <img class="card__img" src="${img}" alt="Card image">
                                     <div class="card__content">
+                                    <h2 class="card__precioAnterior">${precio}</h2>
                                         <div class="card__precio">
-                                            <h2 class="card__title">$${precio}</h2>
+                                            <h2 class="card__title">$ ${precioVenta}</h2>
                                             <h2 class="card__descuento">${descuento}</h2>
                                         </div>
                                         <p class="card__text">${producto.producto}</p>

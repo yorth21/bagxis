@@ -22,7 +22,9 @@
         {
             // Enviar informacion a la vista del producto
             $data = $this->model->getProducto($idProducto);
-            $data['precio'] = number_format($data['precio'], 0, ',', '.'); // Poner puntos de mil
+            $data['precioAnterior'] = number_format($data['precio'], 0, ',', '.'); // Poner puntos de mil
+            $data['precioDescuento'] = $data['precio'] - ($data['precio'] * ($data['descuento'] / 100));
+            $data['precioDescuento'] = number_format($data['precioDescuento'], 0, ',', '.'); // Pasar a moneda
             $data['descuento'] = $data['descuento'] == 0 ? "" : $data['descuento']."%";
 
             $this->views->getView($this, "producto", $data);
@@ -38,7 +40,12 @@
             }
 
             // Listar los productos que tiene en el carrito
-            $data = $this->model->getProductosCarrito($carrito['idcarrito']);
+            $productos = $this->model->getProductosCarrito($carrito['idcarrito']);
+
+            // Obtenemos el total con descuento y la cantidad de productos
+            $data = $this->totalProductos($productos);
+
+            $data['total'] = number_format($data['total'], 0, ',', '.');
 
             // Enviamo los datos a la vista
             $this->views->getView($this, "facturar", $data);
@@ -47,6 +54,12 @@
         public function carrito()
         {
             // Buscar el carrito activo del usuario
+            if (empty($_SESSION)) {
+                echo json_encode("Inicia sesion");
+                return;
+            }
+
+
             $carrito = $this->model->getCarrito($_SESSION['cedula']);
             if (empty($carrito)) {
                 echo json_encode("Sucedio un error comunicate con atencion al usuario");
@@ -58,6 +71,17 @@
 
             // Enviamo los datos a la vista
             $this->views->getView($this, "carrito", $data);
+        }
+
+        public function panelProductos($tipo)
+        {
+            // Validar el tipo de producto y segun eso mostrarlos
+            if ($tipo == "bolsos") {
+                
+            }
+
+
+            $this->views->getView($this, $tipo);
         }
 
         /* Funciones para mostrar datos */
@@ -164,6 +188,71 @@
 
             echo json_encode("ok");
             die();
+        }
+
+        public function facturarProductos()
+        {
+            // Verificar que se haya enviado una solicitud POST
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Leer los datos JSON de la solicitud
+                $json = file_get_contents('php://input');
+                
+                // Decodificar los datos JSON en un array asociativo
+                $post_data = json_decode($json, true);
+            } else {
+                echo json_encode("Servidor no recibio la informacion");
+                return;
+            }
+
+            $formaPago = $post_data['formaPago'];
+            // -------------------------------
+            // Buscar el carrito activo del usuario
+            $carrito = $this->model->getCarrito($_SESSION['cedula']);
+            if (empty($carrito)) {
+                echo json_encode("Sucedio un error comunicate con atencion al usuario");
+                return;
+            }
+
+            // Listar los productos que tiene en el carrito
+            $productos = $this->model->getProductosCarrito($carrito['idcarrito']);
+
+            // Obtenemos el total con descuento y la cantidad de productos
+            $data = $this->totalProductos($productos);
+
+            $factura['idcarrito'] = $carrito['idcarrito'];
+            $factura['total'] = $data['total'];
+            $factura['formaPago'] = $formaPago;
+            
+            // Hacer funcion para enviar datos de la factura y restar la cantidad de los productos
+            // 
+            $res = $this->model->facturarProductos($factura, $carrito['idcarrito'], $_SESSION['cedula'], $productos);
+            if (!$res) {
+                echo json_encode("No se pudo facturar, intente nuevamente");
+                return;
+            }
+
+            echo json_encode("ok");
+            die();
+
+        }
+
+        public function totalProductos($productos)
+        {
+            // Enviar el valor total a pagar y la cantidad de productos
+            $contador = 0; // Contar cuantos productos tiene el carrito
+            $total = 0; // guardar el total a pagar
+            foreach ($productos as $producto) {
+                $precio = $producto['precio'] * $producto['cantidad']; // guardamos el precio segun la cantidad de productos
+                $descuento = ($producto['descuento'] / 100); // descuento del producto
+                $precio = $precio - ($precio * $descuento);
+                $total =+ $precio;
+                $contador++;
+            }
+
+            $data['total'] = $total;
+            $data['productos'] = $contador;
+
+            return $data;
         }
 
     }
