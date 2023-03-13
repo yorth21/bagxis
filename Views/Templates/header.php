@@ -48,12 +48,12 @@
                         </a>
                     </li> -->
                     <li class="right__li">
-                        <a href="<?php echo base_url; ?>Productos/carrito" class="right__a">
-                            <img src="<?php echo base_url; ?>Img/icons/right/cart.svg" alt="cart" class="right__img">
-                        </a>
+                        <button class="right__a right__a--perfil" id="btnCart" onclick="mostrarCart();">
+                            <img src="<?php echo base_url; ?>Img/icons/right/cart.svg" alt="user" class="right__img">
+                        </button>
                     </li>
-                    <li class="right__li rigth__perfil">
-                        <button class="right__a right__a--perfil" id="btnPerfil" onclick="mostrarPerfil();">
+                    <li class="right__li rigth__perfil" id="btnPerfil">
+                        <button class="right__a right__a--perfil" onclick="iniciarSesion();">
                             <img src="<?php echo base_url; ?>Img/icons/right/user.svg" alt="user" class="right__img">
                         </button>
                     </li>
@@ -64,7 +64,7 @@
 
     <nav class="menu">
         <ul class="menu__ul">
-        <li class="menu__li">
+            <li class="menu__li">
                 <a href="<?php echo base_url; ?>Home" class="menu__a">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/home.svg" alt="Inicio" class="menu__img">

@@ -8,13 +8,13 @@ const loginCerrar = document.getElementById('loginCerrar');
 
 /* Funcion para ver el perfil y si
     no esta logueado le muestra el menu */
-const mostrarPerfil = async () => {
+const iniciarSesion = async () => {
     // comprobamos si no esta logueado para mostrar el login
-    const data = await datosSesion();
+    /*const data = await datosSesion();
     if (data.activo == true) {
-        location.href = base_url + 'Login/verPerfil'; // redirigimos a la vista para ver el perfil del usuario
+        location.href = base_url + 'Login/salir';
         return;
-    }
+    }*/
     // abrir el modal del login
     loginDialog.showModal();
 };
@@ -29,6 +29,7 @@ function alert(icono, msg) {
     Swal.fire({
         icon: icono,
         title: msg,
+        //text: txt,
         showConfirmButton: false,
         timer: 3000,
     })
@@ -132,14 +133,84 @@ const datosSesion = async () => {
 const miPerfil = ( data ) => {
     // Obtenemos los campos que vamos a modificar
     const btnPerfil = document.getElementById("btnPerfil");
-    const textBtnPerfil = document.getElementById("textBtnPerfil");
     const nombre = (data.nombres).split(" ");
-    const spanPerfil = `<span class="right__span">${nombre[0]}</span>`;
+    const menuPerfil = `
+                        <div class="right__miperfil">
+                            <div class="right__nombre">
+                                <img src="${ base_url }Img/icons/right/user.svg" alt="user" class="right__img">
+                                <span class="right__span">${ nombre[0] }</span>
+                            </div>
+                            <ul class="right__sublista">
+                                <li class="right__opcion">
+                                    <button class="right__btnopcion" onclick="verMiPerfil();">Mi perfil</button>
+                                </li>
+                                <li class="right__opcion">
+                                    <button class="right__btnopcion" onclick="verMisCompras();">Mis compras</button>
+                                </li>
+                                <li class="right__opcion">
+                                    <button class="right__btnopcion" onclick="cerrarSesion();">Cerrar sesion</button>
+                                </li>
+                            </ul>
+                        </div>
+                        `;
 
     // Hacemos un innerHTML para modificar esos campos y dar ilusion que ya esta logueado
-    btnPerfil.insertAdjacentHTML("beforeend", spanPerfil);
-    textBtnPerfil.innerHTML = nombre[0];
+    btnPerfil.innerHTML = menuPerfil;
 }
 
 
+/* -------------------------------------------------------------
+    Funciones para mostrar ir a la pestaña del cart
+  ------------------------------------------------------------- */
+const mostrarCart = async () => {
+    // comprobamos si no esta logueado para mostrar el login
+    const data = await datosSesion();
+    if (data.activo == true) {
+        // Enviar a la vista carrito
+        location.href = base_url + 'Productos/carrito'; // redirigimos a la vista para ver el perfil del usuario
+        return;
+    } else {
+        // mostrar la alerta
+        alert('info', 'Inicia sesion');
+        return;
+    }
+};
 
+/* -------------------------------------------------------------
+    Funciones del submenu del perfil
+  ------------------------------------------------------------- */
+const verMiPerfil = async () => {
+    const data = await datosSesion();
+    if (data.activo == true) {
+        // Enviar a la vista perfil
+        location.href = base_url + 'Usuario/perfil';
+        return;
+    } else {
+        // mostrar la alerta
+        alert('info', 'Inicia sesion');
+        return;
+    }
+};
+const verMisCompras = async () => {
+    const data = await datosSesion();
+    if (data.activo == true) {
+        // Enviar a la vista de mis compras
+        location.href = base_url + 'Usuario/compras';
+        return;
+    } else {
+        // mostrar la alerta
+        alert('info', 'Inicia sesion');
+        return;
+    }
+};
+const cerrarSesion = async () => {
+    const data = await datosSesion();
+    if (data.activo == true) {
+        location.href = base_url + 'Login/salir';
+        return;
+    } else {
+        // mostrar la alerta
+        alert('info', 'No has iniciado sesion como es que la quieres cerrar');
+        return;
+    }
+};

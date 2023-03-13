@@ -40,15 +40,19 @@
                         <label for="prodtCantidad" class="prodt__label">Cantidad: <span class="prodt__span">(disponibles: <?php echo $data['cantidad']; ?>)</span></label>
                         <input type="hidden" name="prodtId" id="prodtId" value="<?php echo $data['idprodt']; ?>">
                         <input type="hidden" name="prodtStock" id="prodtStock" value="<?php echo $data['cantidad']; ?>">
-                        <input type="text" class="prodt__input" name="prodtCantidad" id="prodtCantidad" value="1">
+                        <?php if ($data['cantidad'] > 0) { ?>
+                            <input type="text" class="prodt__input" name="prodtCantidad" id="prodtCantidad" value="1">
+                        <?php } ?>
                     </form>
                 </div>
-                <div class="prodt__row prodt__row--btn">
-                    <div class="prodt__col prodt__col--btn">
-                        <!-- <button class="prodt__btn">Comprar ahora</button> -->
-                        <button class="prodt__btn prodt__btn--cart" onclick="frmAddCarrito();">Agregar al carrito</button>
+                <?php if ($data['cantidad'] > 0) { ?>
+                    <div class="prodt__row prodt__row--btn">
+                        <div class="prodt__col prodt__col--btn">
+                            <!-- <button class="prodt__btn">Comprar ahora</button> -->
+                            <button class="prodt__btn prodt__btn--cart" onclick="frmAddCarrito();">Agregar al carrito</button>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
         

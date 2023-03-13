@@ -10,6 +10,9 @@
         <li class="new__item">
             <a href="<?php echo base_url; ?>Productos/producto/<?php echo $producto['idprodt']; ?>" class="card">
                 <img class="card__img" src="<?php echo base_url; echo $producto['img']; ?>" alt="Card image">
+                <?php if ($producto['cantidad'] == 0) { ?>
+                    <img src="<?php echo base_url; ?>/Img/bagxis/agotado.png" alt="Agotado" class="card__agotado">
+                <?php } ?>
                 <div class="card__content">
                     <?php
                         // Validar si tiene descuento o no

@@ -25,8 +25,16 @@
     border-bottom: 1px solid var(--black-20);
     font-size: 1.5em;
 }
+.cart__title--compras {
+    border: none;
+    text-align: center;
+}
 .cart__h1 {
     font-weight: bold;
+}
+.cart__h1--fecha {
+    font-weight: bold;
+    font-size: .8em;
 }
 
 /* Producto */

@@ -11,6 +11,8 @@
 @import url(components/carrito.css);
 /* Estilos para la pagina de facturar */
 @import url(components/facturar.css);
+/* Estilos para la pagina de compras */
+@import url(components/compras.css);
 
 /* Estilos para las categorias */
 .new {
@@ -48,6 +50,7 @@
     width: 18rem;
     height: 21rem;
     margin: 0 0 1rem 0;
+    position: relative;
 
     box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
     border-radius: 1rem;
@@ -61,6 +64,13 @@
 .card__img {
     width: 100%;
     height: 60%;
+}
+.card__agotado{
+    width: 6rem;
+    top: .5rem;
+    left: .5rem;
+
+    position: absolute;
 }
 .card__content {
     margin: .5rem 0 0 0;

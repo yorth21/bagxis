@@ -10,6 +10,12 @@
             // cargar construct de la isntancia
             parent::__construct();
         }
+        public function session()
+        {
+            if (empty($_SESSION['activo'])) {
+                header("location: ".base_url);
+            }
+        }
 
         /* Funciones para llamar a las vistas */
         public function index()
@@ -32,6 +38,7 @@
 
         public function facturar()
         {
+            $this->session();
             // Buscar el carrito activo del usuario
             $carrito = $this->model->getCarrito($_SESSION['cedula']);
             if (empty($carrito)) {
@@ -103,6 +110,7 @@
         /* Funcion para agregar el producto al carrito */
         public function addCarrito()
         {
+            $this->session();
             // Verificar que se haya enviado una solicitud POST
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Leer los datos JSON de la solicitud
@@ -137,6 +145,8 @@
 
             // Guardamos el id del carrito
             $post_data['idcarrito'] = $carrito['idcarrito'];
+            $post_data['precio'] = $producto['precio'];
+            $post_data['descuento'] = $producto['descuento'];
 
             // Buscar si el usuario ya habia agregao antes ese producto
             // Si es haci tenemos que sumarlo
@@ -174,6 +184,7 @@
 
         public function delProductoLista()
         {
+            $this->session();
             // Verificar que se haya enviado una solicitud POST
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Leer los datos JSON de la solicitud
@@ -199,6 +210,7 @@
 
         public function facturarProductos()
         {
+            $this->session();
             // Verificar que se haya enviado una solicitud POST
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Leer los datos JSON de la solicitud
@@ -267,7 +279,7 @@
                 $precio = $producto['precio'] * $producto['cantidad']; // guardamos el precio segun la cantidad de productos
                 $descuento = ($producto['descuento'] / 100); // descuento del producto
                 $precio = $precio - ($precio * $descuento);
-                $total =+ $precio;
+                $total += $precio;
                 $contador++;
             }
 

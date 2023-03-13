@@ -11,7 +11,7 @@
         // Funciones para traer datos de la base de datos
         public function getNewProductos()
         {
-            $sql = "SELECT * FROM productos ORDER BY idprodt DESC LIMIT 4;";
+            $sql = "SELECT * FROM productos WHERE estado = 1 AND cantidad != 0 ORDER BY idprodt DESC LIMIT 4;";
             $data = $this->selectAll($sql);
             return $data;
         }
@@ -58,9 +58,9 @@
         public function addProducto(array $post_data)
         {
             // Hacer el SQL para agregar el producto
-            $sql = "INSERT INTO lista (carrito, producto, cantidad)
-                     VALUES (?,?,?)";
-            $data = array($post_data['idcarrito'], $post_data['idprodt'], $post_data['cantidad']);
+            $sql = "INSERT INTO lista (carrito, producto, cantidad, precio, descuento)
+                     VALUES (?,?,?,?,?)";
+            $data = array($post_data['idcarrito'], $post_data['idprodt'], $post_data['cantidad'], $post_data['precio'], $post_data['descuento']);
             $res = $this->save($sql, $data);
             return $res;
         }

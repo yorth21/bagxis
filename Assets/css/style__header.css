@@ -1,8 +1,9 @@
 /* Colores y tipo de fuente */
 :root {
     /* Colores */
-    --violeta: #A08FDB;
+    --violeta: #a08fdb;
     --violeta-20: #EDE9F9;
+    --violeta-40: rgba(160, 143, 219, 0.4);
     --morado: #29194E;
     --secondary: #3e4e18;
     --dark: #182226;
@@ -73,6 +74,8 @@
 .right {}
 .right__ul {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-flow: row nowrap;
 }
 .right__li {
@@ -95,7 +98,53 @@
     margin: 0 0 0 .5rem;
     font-size: 1.2em;
     font-weight: bold;
+    white-space: nowrap;
 }
+/* Mostrar sublista del menu */
+.right__miperfil {
+    padding: .5rem 0;
+    position: relative;
+    cursor: pointer;
+}
+.right__nombre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+}
+.right__sublista{
+    background-color: var(--violeta-20);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+
+    border-radius: .5rem;
+    overflow: hidden;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+} 
+.right__miperfil:hover > .right__sublista{
+    visibility: visible;
+    opacity: 1;
+}
+.right__opcion {
+    color: var(--morado);
+    white-space: nowrap;
+    transition: background-color .2s ease-in-out;
+}
+.right__opcion:hover {
+    background-color: var(--violeta-40);
+}
+.right__btnopcion {
+    width: 100%;
+    padding: .5rem 2rem;
+
+    cursor: pointer;
+}
+
 /* Para ver el perfil */
 /*.right__miperfil {
     background-color: var(--morado);

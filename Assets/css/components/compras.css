@@ -1,0 +1,26 @@
+.compras__row {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+}
+.compras__col {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.compras__row--right {
+    justify-content: right;
+}
+.compras__producto {
+    font-weight: bold;
+}
+.compras__span {}
+.compras__span--title {
+    font-weight: bold;
+    padding: 0 .5rem 0 0;
+}
+.compras__porcentaje {
+    padding: 0 .5rem 0 0;
+    color: var(--secondary);
+}
+.compras__precio {}

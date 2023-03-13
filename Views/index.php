@@ -164,7 +164,7 @@
                                 <a href="${idprodt}" class="card">
                                     <img class="card__img" src="${img}" alt="Card image">
                                     <div class="card__content">
-                                    <h2 class="card__precioAnterior">${precio}</h2>
+                                        <h2 class="card__precioAnterior">${precio}</h2>
                                         <div class="card__precio">
                                             <h2 class="card__title">$ ${precioVenta}</h2>
                                             <h2 class="card__descuento">${descuento}</h2>
