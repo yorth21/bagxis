@@ -27,9 +27,9 @@
                     foreach ($carrito as $producto) { ?>
                         <div class="cart__row cart__row--content">
                             <div class="compras__row">
-                                <div class="compras__col">
+                                <a class="compras__col" href="<?php echo base_url; ?>Productos/producto/<?php echo $producto['idprodt']; ?>">
                                     <h3 class="compras__producto"><?php echo $producto['producto']; ?></h3>
-                                </div>
+                                </a>
                                 <div class="compras__col">
                                     <div class="compras__row compras__row--right">
                                         <span class="compras__span compras__span--title">Cantidad:</span>

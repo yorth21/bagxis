@@ -13,6 +13,8 @@
 @import url(components/facturar.css);
 /* Estilos para la pagina de compras */
 @import url(components/compras.css);
+/* Estilos para la pagina de compras */
+@import url(components/perfil.css);
 
 /* Estilos para las categorias */
 .new {

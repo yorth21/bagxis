@@ -1,0 +1,49 @@
+.perfil__container {
+    max-width: 47.5rem;
+    width: 100%;
+    min-height: 70vh;
+    margin: 2rem 0;
+
+    color: var(--morado);
+
+    display: flex;
+    flex-flow: column nowrap;
+}
+.perfil__content {
+    background-color: var(--white);
+    padding: 2rem;
+    margin: 0 1rem;
+    border: 1px solid var(--black-20);
+    border-radius: .2rem;
+}
+
+/* Estilos para el contenido */
+/* Title */
+.perfil__title {
+    padding: 1rem;
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--black-20);
+}
+.perfil__h1 {
+    font-weight: bold;
+}
+
+/* Grid para mostrar la informacion */
+.perfil__row {
+    width: 100%;
+    padding: .5rem;
+    display: flex;
+    flex-flow: row;
+}
+.perfil__row:not(:last-of-type) {
+    border-bottom: 1px solid var(--black-20);
+  }
+.perfil__col--30 {
+    max-width: 30%;
+    font-weight: bold;
+}
+.perfil__col {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}

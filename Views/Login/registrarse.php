@@ -70,6 +70,12 @@
                 <input type="checkbox" id="tyc" class="regis__check">
             </div>
 
+            <div class="regis__row">
+                <div class="g-recaptcha" data-sitekey="6LeSHxolAAAAAOCfnr-Iz8Dy6Qey0mO33ne2gjgw">
+                    
+                </div>
+            </div>
+
             <div class="regis__row regis__row--btn">
                 <button class="regis__btn" id="btnRegistrarse" type="button" onclick="frmRegistrar(event);">Registrar</button>
             </div>

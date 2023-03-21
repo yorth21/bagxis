@@ -25,8 +25,13 @@
         }
         public function perfil()
         {
+            $this->session();
+            // Traer informacion del usuario
+            $cedula = $_SESSION['cedula'];
+            $data = $this->model->getUser($cedula);
+
             // Enviar a la vista principal en esta caso no tendria
-            $this->views->getView($this, "perfil");
+            $this->views->getView($this, "perfil", $data);
         }
         public function compras()
         {

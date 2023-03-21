@@ -59,6 +59,17 @@
         /* Funcion para registrar a los usuarios */
         public function registrar()
         {
+            // Validamos el captcha
+            $captcha = $_POST['g-recaptcha-response'];
+            $secretkey = "6LeSHxolAAAAAEfbwKENvGUxtgLkhjNGCMyXNqpl";
+
+            $respuesta = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretkey&response=$captcha");
+            $atributos = json_decode($respuesta, TRUE);
+            if (!$atributos['success']) {
+                echo "Verifica el captcha";
+                return;
+            }
+
             // Validamos que los campos del form no esten vacios y los guardamos en un array
             $post_data = array();
             $i = 0; // bamdera para las pocisiones del nuevo vector
@@ -79,6 +90,9 @@
                 echo "Usuario ya existe";
                 return;
             }
+
+            // Eliminamos el captcha del array
+            array_pop($post_data);
 
             // Encriptamos la clave
             $post_data[8] = hash("SHA256", $post_data[8]);

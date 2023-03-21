@@ -10,6 +10,7 @@
     <link href="<?php echo base_url; ?>Assets/css/style__index.css" rel="stylesheet" />
     <link href="<?php echo base_url; ?>Assets/css/style__footer.css" rel="stylesheet" />
     <script src="<?php echo base_url; ?>Assets/js/library/jquery-3.6.3.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="shortcut icon" href="<?php echo base_url; ?>Img/bagxis/bolso.png">
     <title>Bagxis</title>
 </head>
@@ -97,7 +98,7 @@
                 </a>
             </li>
             <li class="menu__li">
-                <button class="menu__a menu__a--iniciar" onclick="mostrarPerfil();">
+                <button class="menu__a menu__a--iniciar" onclick="iniciarSesion();">
                     <div class="menu__div">
                         <img src="<?php echo base_url; ?>Img/icons/menu/user.svg" alt="Perfil" class="menu__img">
                     </div>

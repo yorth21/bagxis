@@ -267,7 +267,6 @@
 
             echo json_encode("ok");
             die();
-
         }
 
         public function totalProductos($productos)
